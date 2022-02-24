@@ -1,0 +1,27 @@
+{
+  "name": "rocket.q",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "nodemon ." 
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BiaRomaniv/rocket.q.git"
+  },
+  "keywords": [],
+  "author": "Bianca Romaniv",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BiaRomaniv/rocket.q/issues"
+  },
+  "homepage": "https://github.com/BiaRomaniv/rocket.q#readme",
+  "dependencies": {
+    "ejs": "^3.1.6",
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
