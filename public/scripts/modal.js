@@ -15,8 +15,10 @@ export default function Modal() {
         document.querySelector(".modal-wrapper").classList.remove("active")// funcionalidade de excluir a classe active do modal
     }
         
+ 
     return{
         open,
-        close
+        close,
+        color
     }
 }
