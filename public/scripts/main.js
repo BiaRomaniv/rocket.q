@@ -5,7 +5,7 @@ const modal = Modal()
 const modalTitle = document.querySelector('.modal h2')
 const modalQuestion = document.querySelector('.modal p')
 const modalButton = document.querySelector('.modal button')
-const modalButtonColor =document.querySelector('.buttons .color')
+
 
 //seleciona todos os botoes com a class check e delete
 const checkButtons = document.querySelectorAll("a.check")
@@ -24,9 +24,13 @@ deleteButtons.forEach(button => {
 //função para lidar com o click nos botoes, colocando um check em true inicialmente
 function handleClick(event, check = true) {
     event.preventDefault()  /// quando clicar nos links, que não devem se comportar como links (ou seja, nao tentar abrir uma pagina)
- 
+    
+    const slug = check ? "check": "delete" // para definir a action do link porque slug????
+    const roomId = document.querySelector("#room-id").dataset.id
+    const questionId = event.target.dataset.id
+
     const form = document.querySelector(".modal form")
-    form
+    form.setAttribute("action",  `/room/${roomId}/${questionId}/${slug}`)
 
 
     modalTitle.innerHTML = check ? "Marcar esta pergunta como lida" : "Excluir esta pergunta" //se check é true, troca o innerHtml pra marcar como lida, se não, Excluir

@@ -137,11 +137,14 @@
 
 /***** Question Read ****/
 .question-wrapper.read{
-    background: var(--grey-medium);
+    background: var(--grey-blue);
 }
 
 .question-wrapper.read .question-content .user{
     background: var(--grey-blue);
+    background: var(--blue);
+    clip-path: circle();
+    padding: 1.4rem;
 }
 
 
