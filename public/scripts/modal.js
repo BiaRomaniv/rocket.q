@@ -19,6 +19,6 @@ export default function Modal() {
     return{
         open,
         close,
-        color
+
     }
 }

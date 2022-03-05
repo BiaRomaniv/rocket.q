@@ -23,9 +23,10 @@ deleteButtons.forEach(button => {
 
 //função para lidar com o click nos botoes, colocando um check em true inicialmente
 function handleClick(event, check = true) {
-    event.preventDefault() // quando clicar nos links, que não devem se comportar como links (ou seja, nao tentar abrir uma pagina)
+    event.preventDefault()  /// quando clicar nos links, que não devem se comportar como links (ou seja, nao tentar abrir uma pagina)
  
-
+    const form = document.querySelector(".modal form")
+    form
 
 
     modalTitle.innerHTML = check ? "Marcar esta pergunta como lida" : "Excluir esta pergunta" //se check é true, troca o innerHtml pra marcar como lida, se não, Excluir
