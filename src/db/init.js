@@ -20,4 +20,4 @@ const initDb = {
     }
 }
 
-initDb.init()
+initDb.init();
