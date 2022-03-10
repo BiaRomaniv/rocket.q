@@ -46,7 +46,7 @@ module.exports = {
         const pass = req.body.password
         let roomId
         let isRoom = true
-         /* while(isRoom){  */
+         while(isRoom){  
             /* Gera o numero da sala */
             for(var i = 0; i < 6; i++){
                 i == 0 ? roomId = Math.floor(Math.random() * 10).toString() :
@@ -65,7 +65,12 @@ module.exports = {
 
             if(!isRoom){
                 /* Inseri a sala no banco */
-            await db.run(`INSERT into rooms (id,pass) VAlUES (${roomId},"pass")`, function(err){
+            await db.run(`INSERT into rooms (
+                id,pass
+                ) VAlUES (
+                    ${roomId},
+                    "${pass}"
+                    )`, function(err){
                  if(err){
                      return console.log(err.message);
                  }
@@ -74,10 +79,34 @@ module.exports = {
 
                 
              }  
-        /*  }         
- */
+          }         
+ 
         await db.close()
 
         res.redirect(`/room/${roomId}`)
     },
+
+    /* lógica para que o número da sala apareça no lugar correspondente dinamicamente */
+    async open(req,res) {
+        const db = await Database()
+        const roomId = req.params.room
+        
+        const questions = await db.all(`SELECT * FROM  questions WHERE room = ${roomId} and read = 0`)
+        const questionsRead = await db.all(`SELECT * FROM questions WHERE room = ${roomId} and read = 1`)
+
+        let isNoQuestions
+        if (questions.length ==0){
+            if(questionsRead.length ==0){
+                isNoQuestions = true
+            }
+        }
+
+
+        res.render("room", {roomId: roomId, questions: questions, questionsRead: questionsRead, isNoQuestions: isNoQuestions})
+    },
+
+    enter(req,res) {
+        const roomId = req.body.roomId
+        res.redirect(`/room/${roomId}`)
+    }
 }

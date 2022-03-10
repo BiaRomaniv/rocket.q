@@ -25,11 +25,11 @@
                     <img src="/images/logo.svg" alt="Rocket.q Logo">
                 </a>
                 <div class="buttons">
-                    <div class="button outlined" id="room-id" data-id="323243"> 
-                        #323243
+                    <div class="button outlined" id="room-id" data-id="<%= roomId %>"> 
+                        #<%= roomId %>
                         <img src="/images/copy.svg" alt="Copiar numero da sala">
                     </div>
-                    <a href="#" class="button">
+                    <a href="/create-pass" class="button">
                         <img src="/images/users-white.svg" alt="criar uma sala">
                         Criar Sala
                     </a>
@@ -39,7 +39,7 @@
                 <section id="question-form">
                     <h2>Faça sua pergunta</h2>
 
-                    <form action="">
+                    <form action="/question/create/<%= roomId %>" method="POST">
                         <label class="sr-only" for="question">O que você quer perguntar?</label>
                         <textarea name="question" id="question"  placeholder="O que você quer perguntar?"></textarea>
                         
@@ -48,7 +48,7 @@
                                 <img src="/images/lock.svg" alt="cadeado">
                                 Esta pergunta é anônima
                             </div>
-                            <button>Enviar</button>
+                            <button type="submit">Enviar</button>
                         </footer>
                     </form>                    
                 </section>
@@ -56,70 +56,56 @@
                 <section id="questions">
                     <h2 class="sr-only"> Perguntas da comunidade</h2>
                     <div class="questions">
-                        <div class="question-wrapper">
-                            <div class="question-content">
-                                <div class="user">
-                                    <img src="/images/user.svg" alt="">
-                                </div>
-                                <div class="question">
-                                    <p>Qual a diferença entre const, var e let?</p>
-                                </div>
-                            </div>
 
-                            <div class="actions">
-                                <a href="#" class="check" data-id="2">
-                                    <img src="/images/check.svg" alt="marcar como lida">
-                                    Marcar como lida
-                                </a>
-                                <a href="#" class="delete" data-id="2">
-                                    <img src="/images/trash.svg" alt="excluir">
-                                    Excluir
-                                </a>
-                            </div>
-                        </div>
-                        <div class="question-wrapper">
-                            <div class="question-content">
-                                <div class="user">
-                                    <img src="/images/user.svg" alt="">
-                                </div>
-                                <div class="question">
-                                    <p>Qual a diferença entre const, var e let?</p>
-                                </div>
-                            </div>
+                        <% if (isNoQuestions) { %> 
+                            <%- include ('parts/no-question')%>    
+                        <%}%>
 
-                            <div class="actions">
-                                <a href="#" class="check" data-id="3">
-                                    <img src="/images/check.svg" alt="marcar como lida">
-                                    Marcar como lida
-                                </a>
-                                <a href="#" class="delete" data-id="3">
-                                    <img src="/images/trash.svg" alt="excluir">
-                                    Excluir
-                                </a>
+                        <!-- incluir um for each para que leia tudo do array -->
+                        <% questions.forEach(question => { %>
+                            <div class="question-wrapper">
+                                <div class="question-content">
+                                    <div class="user">
+                                        <img src="/images/user.svg" alt="">
+                                    </div>
+                                    <div class="question">
+                                        <p><%= question.title %></p>
+                                    </div>
+                                </div>
+    
+                                <div class="actions">
+                                    <a href="#" class="check" data-id="<%= question.id %>">
+                                        <img src="/images/check.svg" alt="marcar como lida">
+                                        Marcar como lida
+                                    </a>
+                                    <a href="#" class="delete" data-id="<%= question.id %>">
+                                        <img src="/images/trash.svg" alt="excluir">
+                                        Excluir
+                                    </a>
+                                </div>
                             </div>
-                        </div>
+                        <% }) %>
+                        
+                        <% questionsRead.forEach(questionRead => { %>
                         <div class="question-wrapper read">
                             <div class="question-content">
                                 <div class="user">
                                     <img src="/images/user.svg" alt="">
                                 </div>
                                 <div class="question">
-                                    <p>Qual a garantia de que eu vou conseguir fazer tudo isso sozinha?</p>
+                                    <p><%= questionRead.title%></p>
                                 </div>
                             </div>
 
                             <div class="actions">
-                                <a href="#" class="check" data-id="1">
-                                    <img src="/images/check.svg" alt="marcar como lida">
-                                    Marcar como lida
-                                </a>
-                                <a href="#" class="delete" data-id="1">
+                                <a href="#" class="delete" data-id="<%= questionRead.id %>">
                                     <img src="/images/trash.svg" alt="excluir">
                                     Excluir
                                 </a>
                             </div>
                         </div>
                     </div>
+                    <% }) %>
                 </section>
                    
             </main>
